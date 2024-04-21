@@ -1,20 +1,94 @@
 # Movie Recommendation System Analysis
 
-This repository explores different implementations of a movie recommendation system using both collaborative filtering and content-based filtering techniques. The goal is to analyze and compare various machine learning algorithms to provide personalized movie recommendations to users. (Dataset is taken from Kaggle) 
+This repository presents a comprehensive analysis of traditional machine learning techniques for personalized movie recommendation systems. The primary objective is to apply and rigorously evaluate collaborative filtering and content-based filtering methods, emphasizing systematic performance assessments across computational efficiency, cold-start handling, and recommendation quality.
 
-# Collaborative Filtering
-Collaborative filtering methods leverage user-item interaction data to generate recommendations. In this analysis, we employ three techniques:
+## Dataset
 
-1. K-Means Clustering: Groups users or items into clusters based on their similarities in rating patterns. Recommendations are then made based on the preferences of users within the same cluster.
-2. Linear Regression: Predicts user ratings for movies based on historical data. The model learns the relationships between user attributes and movie preferences to make recommendations.
-3. K-Nearest Neighbors (KNN): Recommends movies similar to those a user has liked or interacted with based on their features.
+The analysis utilizes the MovieLens dataset, which consists of two main tables: "movies" and "ratings". The "movies" table contains information about various films, including their unique identifiers, titles, and associated genres. The "ratings" table captures user interactions and preferences by recording user identifiers, movie identifiers, and corresponding rating values.
 
-# Content-Based Filtering
-Content-based filtering recommends items to users based on the attributes or characteristics of the items themselves. Here, we implement four algorithms:
+## Collaborative Filtering
 
-1. The NB classifier is not used to directly predict user preferences but rather to find movies with similar attributes.
-2. Support Vector Machine (SVM): Utilizes SVM with different kernels (linear, polynomial with degree 5, and RBF) to classify movies and make recommendations.
+Collaborative filtering techniques leverage user-item interaction data to generate recommendations. The following approaches are implemented and analyzed:
 
-# Conclusion
-By comparing the effectiveness and efficiency of various algorithms in providing personalized movie recommendations, this analysis aims to help us understand the strengths and weaknesses of different recommendation techniques and make informed decisions when implementing recommendation systems in real-world applications. Feedbacks are appreciated!
+1. **K-Nearest Neighbors (KNN)**: Recommends movies similar to those a user has liked or interacted with based on their features.
+2. **K-Means Clustering**: Groups users or items into clusters based on their similarities in rating patterns. Recommendations are then made based on the preferences of users within the same cluster.
+3. **Logistic Regression (LR)**: Predicts user ratings for movies based on historical data. The model learns the relationships between user attributes and movie preferences to make recommendations.
+4. **Singular Value Decomposition (SVD)**: Reduces the dimensionality of a user-item interaction matrix by identifying latent factors representing user preferences and item characteristics, enabling personalized recommendations based on these factors.
+5. **Random Forest**: An ensemble learning method that constructs multiple decision trees during training and outputs the mode of the classes (or mean prediction) for classification (or regression) tasks, capturing complex relationships between movie features and user preferences.
 
+## Content-Based Filtering
+
+Content-based filtering recommends items to users based on the attributes or characteristics of the items themselves. The following techniques are implemented:
+
+1. **Naive Bayes (NB)**: Utilizes a Multinomial Naive Bayes model trained on TF-IDF vectors of movie genres to recommend movies with similar genres.
+2. **Support Vector Machines (SVM)**: Employs SVM with different kernels (linear, polynomial, and Radial Basis Function) to separate movies into different classes based on their features and make recommendations accordingly.
+
+## Analysis
+
+The analysis is structured into three main sections:
+
+1. **Computational Load Analysis**: Examines the time taken by the system to train its models under different computational loads, enabling resource allocation optimization and performance enhancement.
+2. **Analysis of Cold Start Recommendations**: Assesses the system's efficacy in offering recommendations for new users or items, addressing the "cold start" challenge.
+3. **Evaluation of Recommendation Quality**: Performs a qualitative assessment and comparison of the recommendations generated by different models, evaluating their ability to capture thematic similarities and provide diverse yet relevant suggestions.
+
+## Conclusion
+
+The analysis provides valuable insights into the strengths, limitations, and real-world applicability of various traditional machine learning techniques for movie recommendation systems. Key findings include the computational efficiency of Random Forest and Naive Bayes, the capability of certain methods to mitigate the cold-start problem partially, and the effectiveness of linear and RBF kernels in capturing genre similarities and providing diverse recommendations.
+
+Please refer to the [LaTeX report](Report.pdf) for detailed information, including methodology, results, and analysis.
+
+## Running the Scripts
+
+This repository includes two scripts, `singlecore.sh` and `multicore.sh`, to execute the Python scripts and measure their run times.
+
+### singlecore.sh
+
+This script runs the Python scripts sequentially on a single core. It performs the following steps:
+
+1. Activates the specified conda environment.
+2. Iterates over all `.py` files in the `Python Scripts` folder.
+3. For each Python script, it runs the script `NUM_RUNS` times (default is 10).
+4. Measures the execution time for each run.
+5. Stores the results (file name and execution time) in a CSV file (`run_time.csv`) in the `Analysis` folder.
+
+To run the script, navigate to the project folder and execute:
+
+```bash
+bash singlecore.sh
+```
+
+### multicore.sh
+
+This script runs the Python scripts concurrently on multiple cores. Please note that running multiple cores simultaneously may lead to resource contention, potentially affecting the accuracy of results.
+
+The script follows these steps:
+
+1. Activates the specified conda environment.
+2. Iterates over all `.py` files in the `Python Scripts` folder.
+3. Starts a separate process for each Python script, running it `NUM_RUNS` times (default is 10).
+4. Measures the execution time for each run.
+5. Stores the results (file name and execution time) in a CSV file (`run_time.csv`) in the `Analysis` folder.
+
+To run the script, navigate to the project folder and execute:
+
+```bash
+bash multicore.sh
+```
+
+**Note:** Before running the scripts, ensure that you have the correct paths set for your conda installation and the desired conda environment. Additionally, make sure that the `Python Scripts` and `Analysis` folders exist in the project directory.
+
+By running these scripts, you can collect and analyze the execution times of the Python scripts, which can be helpful for benchmarking and performance evaluation purposes.
+
+## Contributors
+
+- [Parth Darshan](https://github.com/b22cse040)
+
+- [Mayank Bansal](https://github.com/Bansal0527)
+
+- [Palash Khatod](https://github.com/palash-kh) 
+
+- [Akarsh Katiyar](https://github.com/aakarsh-kt)
+
+- [Ram Prasad](https://github.com/Ramjat19)
+
+- [Rakshit Singhal](https://github.com/rakshitx1)

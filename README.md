@@ -79,6 +79,14 @@ bash multicore.sh
 
 By running these scripts, you can collect and analyze the execution times of the Python scripts, which can be helpful for benchmarking and performance evaluation purposes.
 
+**Google Colab**
+
+We have also created a Google Colab notebook where all the models are pre-loaded and ready for experimentation. You can access the notebook [here](https://colab.research.google.com/drive/1SX5sxvc3PzmaDYX0D0yHBpIApekDzXaq?usp=sharing).
+
+**Website**
+
+We have created a website that explains the basics of these models and it can be accessed [here](https://bansal0527.github.io/Movie-Recomendation-System/).
+
 ## Contributors
 
 - [Parth Darshan](https://github.com/b22cse040)

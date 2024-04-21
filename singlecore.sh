@@ -1,16 +1,19 @@
 #!/bin/bash
 
-# Caution: Running multiple cores simultaneously may lead to resource contention, potentially affecting the accuracy of results.
-
 source ~/mambaforge/etc/profile.d/conda.sh # Change this path to your conda installation
 conda activate base # Change this to the name of your conda environment
 
-FOLDER_PATH="Python Scripts"
-ANALYSIS_FOLDER="Analysis"
+PROJECT_FOLDER="$PWD"
+FOLDER_PATH="$PROJECT_FOLDER/Python Scripts"
+ANALYSIS_FOLDER="$PROJECT_FOLDER/Analysis"
 NUM_RUNS=10
 CSV_FILE="$ANALYSIS_FOLDER/run_time.csv"
 
-rm -f "$CSV_FILE"
+mkdir -p "$ANALYSIS_FOLDER"
+
+if [ -f "$CSV_FILE" ]; then
+    rm "$CSV_FILE"
+fi
 
 run_python_script() {
     file="$1"
@@ -24,23 +27,11 @@ run_python_script() {
     done
 }
 
-run_multicore() {
-    python_files=("$@")
-
-    for file in "${python_files[@]}"; do
-        run_python_script "$file" &
-    done
-
-    wait
-}
-
 cd "$FOLDER_PATH" || exit
 python_files=()
 for file in *.py; do
-    python_files+=("$file")
+    run_python_script "$file"
 done
-
-run_multicore "${python_files[@]}"
 
 echo "Execution complete. Results written to $CSV_FILE"
 
